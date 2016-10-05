@@ -30,8 +30,8 @@ class SafeLoader(Reader, Scanner, Parser, Composer, SafeConstructor, Resolver):
 
 class Loader(Reader, Scanner, Parser, Composer, Constructor, Resolver):
 
-    def __init__(self, stream):
-        Reader.__init__(self, stream)
+    def __init__(self, stream, allow_unicode=None):
+        Reader.__init__(self, stream, allow_unicode)
         Scanner.__init__(self)
         Parser.__init__(self)
         Composer.__init__(self)

@@ -56,7 +56,8 @@ class Reader(object):
 
     # Yeah, it's ugly and slow.
 
-    def __init__(self, stream):
+    def __init__(self, stream, need_check_printable=None):
+        self.need_check_printable = need_check_printable
         self.name = None
         self.stream = None
         self.stream_pointer = 0
@@ -136,6 +137,8 @@ class Reader(object):
 
     NON_PRINTABLE = re.compile(u'[^\x09\x0A\x0D\x20-\x7E\x85\xA0-\uD7FF\uE000-\uFFFD]')
     def check_printable(self, data):
+        if not self.need_check_printable:
+            return
         match = self.NON_PRINTABLE.search(data)
         if match:
             character = match.group()
